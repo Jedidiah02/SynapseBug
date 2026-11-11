@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Register</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <!-- FontAwesome for eye icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      background-image: url('https://cdn.pixabay.com/photo/2021/08/31/00/04/sunrise-6587391_640.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Increase the size of the Register title */
+    h2 {
+      font-size: 2.5rem;
+      color: black;
+      font-weight: bold;
+    }
+    /* Position eye icon inside password field */
+    .password-wrapper {
+      position: relative;
+    }
+    .password-wrapper .fa-eye {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+    /* Button styling */
+    .shadow__btn {
+      padding: 8px 18px; /* Decreased padding */
+      border: none;
+      font-size: 15px; /* Decreased font size */
+      color: #fff;
+      border-radius: 7px;
+      letter-spacing: 2px; /* Slightly decreased letter spacing */
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: 0.5s;
+      transition-property: box-shadow;
+      background: rgb(0,140,255);
+      box-shadow: 0 0 25px rgb(0,140,255);
+    }
+    .shadow__btn:hover {
+      box-shadow: 0 0 5px rgb(0,140,255),
+                  0 0 25px rgb(0,140,255),
+                  0 0 50px rgb(0,140,255),
+                  0 0 100px rgb(0,140,255);
+    }
+    /* Footer styles */
+    .footer {
+      width: 100%;
+      text-align: center;
+      color: black;
+      padding: 20px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    .footer .icon {
+      font-size: 24px;
+      color: black; /* Set icon color to black */
+      margin: 0 10px;
+    }
+    .footer .icon:hover {
+      color: #007bff; /* Change color on hover */
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center mb-4">Register</h2>
+      <form action="/register" method="POST">
+        <div class="form-group">
+          <input type="text" class="form-control" name="name" placeholder="Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" name="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="username" placeholder="Username" required>
+        </div>
+        <div class="form-group password-wrapper">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+          <i class="fa fa-eye" id="togglePassword"></i>
+        </div>
+        <button type="submit" class="btn shadow__btn btn-block">Register</button>
+        {% if error %}
+        <div class="alert alert-danger mt-2">
+          <ul>
+            {% for message in error %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<nav class="footer">
+  <div class="container">
+    <span class="icon">
+      <i class="fab fa-twitter"></i>
+    </span>
+    <span class="icon">
+      <i class="fab fa-facebook"></i>
+    </span>
+    <span class="icon">
+      <i class="fab fa-instagram"></i>
+    </span>
+    <span class="icon">
+      <i class="fab fa-github"></i>
+    </span>
+    <span class="icon">
+      <i class="fas fa-envelope"></i>
+    </span>
+  </div>
+  <small>
+    &copy; SynapseBug. All Rights Reserved.
+  </small>
+</nav>
+
+<!-- JavaScript to toggle password visibility -->
+<script>
+  document.getElementById('togglePassword').addEventListener('click', function (e) {
+    const password = document.getElementById('password');
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    this.classList.toggle('fa-eye-slash');
+  });
+</script>
+
+</body>
+</html>
